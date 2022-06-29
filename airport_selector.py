@@ -2,7 +2,8 @@
 from calendar import c
 import csv
 from getkey import getkey, keys
-from console_output import bcolors
+from colorama import Fore, Style
+from matplotlib import style
 from pynput.keyboard import Key, Listener
 
 airports = []
@@ -23,9 +24,11 @@ def getSelectedAirport():
     if(len(airports) == 0):
         getAirportsFromCSV()
     print("Please select your destination airport:")
-    print(bcolors.UNDERLINE, airports[0], end='\r')
+    print(Fore.MAGENTA, airports[0], end='\r')
     with Listener(on_press = airportConsoleSelection) as listener:   
         listener.join()
+        listener.stop()
+        return selectedAirport
 
 def airportConsoleSelection(key):
     global current 
@@ -35,15 +38,16 @@ def airportConsoleSelection(key):
         if current < len(airports): 
             current+=1
             print("                                                                           ", end='\r')
-            print(bcolors.UNDERLINE, airports[current], end='\r')
+            print(Fore.MAGENTA, airports[current], end='\r')
     elif key == keys.DOWN:
         if current > 0:
             current-=1
             print("                                                                           ", end='\r')
-            print(bcolors.UNDERLINE, airports[current], end='\r')
+            print(Fore.MAGENTA, airports[current], end='\r')
     elif key == keys.ENTER:
-        print(bcolors.OKGREEN, "Selected: ", airports[current])
+        print(Fore.GREEN, "Selected: ", airports[current])
+        print(Style.RESET_ALL)
         selectedAirport = airports[current]
-        return airports[current]
+        return False
 
   
