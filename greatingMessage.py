@@ -1,0 +1,20 @@
+from console_output import bcolors
+
+def printGreeting():
+    print("Hello! Thank you for flying wiht us!")
+    print("\n\n")
+    print("                                                                                            ")
+    print(bcolors.OKCYAN,"            ###                                                                             ")
+    print(bcolors.OKCYAN,"           #   #                                                                            ")
+    print(bcolors.OKCYAN," #######    #    #                                                                          ")
+    print(bcolors.OKCYAN,"  ##   ###   #    #                                                                         ")
+    print(bcolors.OKCYAN,"    ##  ######    ###O###O###O###O###                                                       ")
+    print(bcolors.OKCYAN,"     ##                               #                                                     ")
+    print(bcolors.OKCYAN,"     ##                               #                                                     ")
+    print(bcolors.OKCYAN,"       #######    ###O###O###O###O###                                                       ")
+    print(bcolors.OKCYAN,"            #    #                                                                          ")
+    print(bcolors.OKCYAN,"           #    #                                                                           ")
+    print(bcolors.OKCYAN,"          #    #                                                                            ")
+    print(bcolors.OKCYAN,"           ###                                                                              ")
+    print("\n\n")
+    print("Would you like to find an airport or see all airports?")
