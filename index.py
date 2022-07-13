@@ -3,13 +3,16 @@ from driverHandler import WebPageConductor
 from greatingMessage import printGreeting
 from colorama import Fore, Style
 from generateDates import Dates
+
 # Start of Call stack
 printGreeting()
 #selectedAirport = getSelectedAirport()
-#currentScraper = WebPageConductor(selectedAirport)
-print(Fore.YELLOW,"Testing with Abeid Airport")
+selectedAirport = "LAX"
+dateObject = Dates("220719", "221012")
+currentScraper = WebPageConductor(dateObject)
+currentScraper.getPricesForAirport(selectedAirport, "slc")
+print(Fore.YELLOW,"Testing with AAA")
 print(Style.RESET_ALL)
+
 #currentScraper = WebPageConductor('Abeid Amani Karume International Airport')
-#currentScraper.getPricesForAirport()
-datesGenerated = Dates("07122022", "09122022",7)
-datesGenerated.getDays()
+#currentScraper.getPricesForAirport(datesGenerated.getDays())
