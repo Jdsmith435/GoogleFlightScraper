@@ -1,46 +1,39 @@
 # Gets search results based off provided information. 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as Ec
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from colorama import Fore, Style
+from selenium.webdriver.common.keys import Keys
 import time
 
 class WebPageConductor: 
-    googleFlightsURL    = "https://www.google.com/travel/flights?hl=en-US"
-
-    def __init__(self, airport:str):
-        self.destAirport = airport
+    
+    def __init__(self, dateObject):
+        self.dateObject = dateObject
+    #            https://www.google.com/travel/flights?q=Flights%20to%20AAA%20from%20slc%20on%202022-10-01%20through%202022-10-12
+    #            https://www.google.com/travel/flights?q=Flights%20to%20SFO%20from%20HNL%20on%202022-09-13%20through%202022-09-17
+    def generateURLRequest(self, destCode, origCode, startDate, endDate): 
+        return ("https://www.google.com/travel/flights?q=Flights%20to%20" + destCode + "%20from%20" + origCode + "%20on%20"+startDate+"%20through%20"+endDate)
 
     # Searches a single airport over a certain date range
-    def getPricesForAirport(self):
-
+    def getPricesForAirport(self, destCode, origCode):
         options = Options()
         # Doesn't open gui
         # options.add_argument('--headless')
+        #for endDate in self.dateObject.getDays():
+           #print(endDate)
 
         try:
             driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-            driver.get(self.googleFlightsURL)
-            flightDestination = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Where to?']")
-            printState("Selected placeholder Where to?", "\r")
-            flightDestination.click()
-            flightDestination = driver.find_element(By.CSS_SELECTOR, "input[aria-describedby='i22']")
-            printState("Selected placeholder Where else?","\r")
-            flightDestination.click()
-            flightDestination.clear()
-            flightDestination.send_keys(self.destAirport)
-            printState("Sending Keys Destination Airport pt 2","\r")
-            
+            driver.get(self.generateURLRequest(destCode,origCode,self.dateObject.startDayGetter(),self.dateObject.endDayGetter()))
+
             time.sleep(12)
 
-            #flightDestination.send_keys(Keys.TAB)
+            #flightInput.send_keys(Keys.TAB)
          
             
             #startDate = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Departure']")
