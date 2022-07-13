@@ -17,7 +17,7 @@ def getAirportsFromCSV():
     with open("largeAirports.csv") as csvfile:
         rows = csv.reader(csvfile)
         for row in rows:
-            airports.append(row)
+            airports.append(row[1])
             airports.sort()
 
 def getSelectedAirport():
